@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Candidatura PWP & HTH-pt 2026 — Agrupamento 1250 Adães</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #2C3E2D;
+    --moss: #4A5E3A;
+    --fern: #6B7F55;
+    --sage: #9CAF88;
+    --cream: #F5F0E8;
+    --parchment: #EDE5D0;
+    --bark: #7C5C3A;
+    --earth: #5C3D1E;
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --ink: #1A1F1A;
+    --mist: #D4CCBB;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--forest);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(44, 62, 45, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--mist);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 6rem 2rem 4rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(74, 94, 58, 0.4) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(107, 127, 85, 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 100%, rgba(44, 62, 45, 0.8) 0%, transparent 60%);
+  }
+
+  /* SVG mountain / tree decoration */
+  .hero-mountains {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 260px;
+    opacity: 0.18;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-subtitle {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--sage);
+    margin: 1.5rem 0 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(201, 168, 76, 0.12);
+    border: 1px solid rgba(201, 168, 76, 0.35);
+    color: var(--gold-light);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    padding: 0.5rem 1.2rem;
+    border-radius: 2rem;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--mist);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s forwards;
+  }
+
+  .scroll-arrow {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201, 168, 76, 0.25);
+    max-width: 80px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--cream);
+    margin-bottom: 2rem;
+    line-height: 1.2;
+  }
+
+  /* SOBRE MIM */
+  .sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .sobre-card {
+    background: rgba(245, 240, 232, 0.05);
+    border: 1px solid rgba(245, 240, 232, 0.1);
+    border-radius: 4px;
+    padding: 1.5rem;
+  }
+
+  .sobre-card-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .sobre-card-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--cream);
+  }
+
+  .sobre-card-value small {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--sage);
+    display: block;
+    margin-top: 0.25rem;
+  }
+
+  /* FOTO PLACEHOLDER */
+  .foto-hero {
+    width: 100%;
+    aspect-ratio: 16/7;
+    background: rgba(74, 94, 58, 0.3);
+    border: 1px solid rgba(156, 175, 136, 0.2);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 3rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .foto-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(74,94,58,0.2) 0%, rgba(44,62,45,0.4) 100%);
+  }
+
+  .foto-placeholder-text {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: var(--sage);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+  }
+
+  .foto-icon {
+    font-size: 2rem;
+    opacity: 0.5;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+    margin-top: 3rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+
+  .timeline-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -2.4rem;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--forest);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.2);
+  }
+
+  .timeline-year {
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.9rem;
+    color: var(--sage);
+    line-height: 1.6;
+  }
+
+  /* CARTA */
+  .carta-section {
+    background: var(--parchment);
+    color: var(--ink);
+  }
+
+  .carta-section .section-label { color: var(--bark); }
+  .carta-section .section-label::after { background: rgba(124, 92, 58, 0.3); }
+  .carta-section .section-title { color: var(--earth); }
+
+  .carta-body {
+    background: #FBF7EF;
+    border: 1px solid rgba(124, 92, 58, 0.15);
+    border-radius: 2px;
+    padding: 3rem;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    line-height: 1.9;
+    color: #2A2015;
+    box-shadow: 0 4px 40px rgba(90, 60, 20, 0.08), inset 0 0 60px rgba(237, 229, 208, 0.3);
+    position: relative;
+  }
+
+  .carta-body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--bark), var(--gold), var(--bark));
+  }
+
+  .carta-bloco {
+    margin-bottom: 2.2rem;
+  }
+
+  .carta-bloco-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bark);
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(124, 92, 58, 0.2);
+    padding-bottom: 0.4rem;
+  }
+
+  .carta-bloco p {
+    margin-bottom: 1rem;
+  }
+
+  .carta-bloco p:last-child { margin-bottom: 0; }
+
+  /* GALERIA */
+  .galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .galeria-item {
+    aspect-ratio: 4/3;
+    background: rgba(74, 94, 58, 0.25);
+    border: 1px solid rgba(156, 175, 136, 0.2);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--sage);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: border-color 0.3s, background 0.3s;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .galeria-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+  }
+
+  .galeria-item:hover {
+    border-color: rgba(201,168,76,0.4);
+    background: rgba(74, 94, 58, 0.4);
+  }
+
+  .galeria-item .foto-icon { font-size: 1.4rem; opacity: 0.4; }
+
+  /* DOWNLOAD */
+  .download-section {
+    background: rgba(201, 168, 76, 0.06);
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+  }
+
+  .download-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .download-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--cream);
+    margin-bottom: 0.4rem;
+  }
+
+  .download-text p {
+    font-size: 0.85rem;
+    color: var(--sage);
+  }
+
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--gold);
+    color: var(--forest);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    padding: 0.9rem 2rem;
+    border-radius: 2rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-download:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--fern);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    border-top: 1px solid rgba(107, 127, 85, 0.2);
+  }
+
+  footer .fleur {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  /* DIVIDER ORNAMENT */
+  .ornament {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 4rem 0;
+    color: rgba(201, 168, 76, 0.3);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+  }
+
+  .ornament::before, .ornament::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201, 168, 76, 0.2);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.15); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .sobre-grid { grid-template-columns: 1fr; }
+    .galeria-grid { grid-template-columns: repeat(2, 1fr); }
+    .carta-body { padding: 1.5rem; }
+    .download-inner { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">✦ 1250 · Adães</div>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre mim</a></li>
+    <li><a href="#percurso">Percurso</a></li>
+    <li><a href="#carta">Carta</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+    <li><a href="#download">Download</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <svg class="hero-mountains" viewBox="0 0 1440 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 260 L0 180 L120 90 L240 150 L380 40 L520 130 L640 60 L760 120 L900 30 L1040 110 L1180 50 L1320 130 L1440 80 L1440 260 Z" fill="#4A5E3A"/>
+    <path d="M0 260 L0 210 L100 160 L200 200 L320 140 L440 185 L560 130 L680 170 L800 115 L940 165 L1080 120 L1200 160 L1340 130 L1440 155 L1440 260 Z" fill="#2C3E2D"/>
+    <!-- Trees -->
+    <g fill="#3A5030" opacity="0.7">
+      <polygon points="60,180 75,140 90,180"/>
+      <polygon points="70,180 85,128 100,180"/>
+      <polygon points="1340,155 1355,115 1370,155"/>
+      <polygon points="1350,155 1365,103 1380,155"/>
+      <polygon points="700,170 715,130 730,170"/>
+      <polygon points="710,170 725,118 740,170"/>
+    </g>
+  </svg>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">✦ &nbsp; Candidatura Internacional 2026 &nbsp; ✦</p>
+    <h1 class="hero-title">
+      Portuguese Work Party<br><em>&amp; Help the Hill Portugal</em>
+    </h1>
+    <p class="hero-subtitle">Uma viagem de serviço, crescimento e escutismo além-fronteiras</p>
+    <div class="hero-badges">
+      <span class="badge">🇨🇭 Kandersteg · Suíça</span>
+      <span class="badge">🇮🇪 Larch Hill · Irlanda</span>
+      <span class="badge">📅 3–11 Outubro 2026</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Explorar</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- SOBRE MIM -->
+<section id="sobre">
+  <div class="section-inner">
+    <p class="section-label fade-in">Candidato</p>
+    <h2 class="section-title fade-in">Quem sou eu</h2>
+
+    <div class="foto-hero fade-in">
+      <img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (3).jpeg" alt="Foto principal" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+    </div>
+
+    <div class="sobre-grid fade-in">
+      <div class="sobre-card">
+        <p class="sobre-card-label">Agrupamento</p>
+        <p class="sobre-card-value">1250 — Adães<small>Núcleo de Barcelos · Região Braga</small></p>
+      </div>
+      <div class="sobre-card">
+        <p class="sobre-card-label">Secção</p>
+        <p class="sobre-card-value">Caminheiros<small><!-- Guia de Clã · --> Guia da Tribo Fernando Pessoa</small></p>
+      </div>
+      <div class="sobre-card">
+        <p class="sobre-card-label">Escuteiro desde</p>
+        <p class="sobre-card-value">2017<small>Quase 9 anos de caminhada escutista</small></p>
+      </div>
+      <div class="sobre-card">
+        <p class="sobre-card-label">Formação</p>
+        <p class="sobre-card-value">CTESP — TPSI<small>IPVC Viana do Castelo · Estágio em curso</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERCURSO -->
+<section id="percurso" style="background: rgba(0,0,0,0.15);">
+  <div class="section-inner">
+    <p class="section-label fade-in">Percurso</p>
+    <h2 class="section-title fade-in">A minha viagem escutista</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-year">2017</p>
+        <p class="timeline-title">Início da caminhada</p>
+        <p class="timeline-desc">Entrei para o CNE no Agrupamento 1250 de Adães. O início de uma viagem que dura até hoje.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-year">2017 — 2023</p>
+        <p class="timeline-title">Cargos e responsabilidades</p>
+        <p class="timeline-desc">Ao longo dos anos passei por quase todos os cargos do agrupamento, acumulando experiência de liderança, organização e serviço.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-year">2024 — 2025</p>
+        <p class="timeline-title">Clã de Núcleo de Barcelos</p>
+        <p class="timeline-desc">Com apenas dois elementos no Clã de Adães, juntámo-nos ao Clã de Núcleo de Barcelos. Foi uma decisão que mudou tudo: reencontrei motivação, aprendi a colaborar com outros agrupamentos e redescobri o escutismo com olhos novos.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-year">Hoje</p>
+        <p class="timeline-title"><!-- Guia de Clã · --> Guia da Tribo Fernando Pessoa</p>
+        <p class="timeline-desc">Com responsabilidade acrescida, participo em todas as oportunidades que aparecem. Esta candidatura é a maior delas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARTA -->
+<section id="carta" class="carta-section">
+  <div class="section-inner">
+    <p class="section-label fade-in">Motivação</p>
+    <h2 class="section-title fade-in">Carta de candidatura</h2>
+
+    <div class="carta-body fade-in">
+
+      <div class="carta-bloco">
+        <p class="carta-bloco-label">Abertura</p>
+        <p>O escutismo entrou na minha vida em 2017 e desde então tem sido uma viagem de crescimento constante. Mas, como qualquer viagem, houve momentos de dúvida. No ano escutista 2024/2025 vivi um desses momentos: o meu Clã, no Agrupamento 1250 de Adães, ficámos apenas dois. Eu e a Bruna. Em vez de desistir, tomámos uma decisão que mudou a minha perspetiva: juntar-nos ao Clã de Núcleo de Barcelos.</p>
+      </div>
+
+      <div class="carta-bloco">
+        <p class="carta-bloco-label">Porque quero participar</p>
+        <p>Foi no Clã de Núcleo que reencontrei o meu lugar no movimento. Passei a conhecer outros agrupamentos, a partilhar experiências, a superar desafios físicos e espirituais lado a lado com pessoas que não conhecia. Descobri que o escutismo cresce quando saímos da nossa zona de conforto — e foi isso que me fez querer ir mais longe.</p>
+        <p>A PWP e a HTH-pt são exatamente esse próximo passo. Quero fazer serviço real num centro escutista internacional, contribuir com as minhas mãos e a minha energia para preparar um espaço que acolherá escuteiros de todo o mundo. Quero representar o escutismo português com orgulho, mostrar a nossa cultura, a nossa forma de estar, os nossos valores — e aprender com os de outros. Quero também colocar em prática o meu inglês num contexto que exige comunicação real, espontânea e autêntica. E, não menos importante, quero viajar pela primeira vez — e que melhor primeira viagem do que esta?</p>
+      </div>
+
+      <div class="carta-bloco">
+        <p class="carta-bloco-label">Porque devo ser escolhido</p>
+        <p>Sou uma pessoa habituada a trabalho duro. Há três anos trabalho em catering em eventos de casamento, onde faço de tudo: montagem de sala, serviço de mesa, bartender, showcooking, buffets, limpeza de cozinha, carga e descarga de mercadoria — muitas vezes percorrendo mais de 30 quilómetros a pé num único evento. Já ajudei na serralharia do meu tio, na padaria do meu pai e acumulei mais de 600 horas de estágio na área de informática de gestão, onde hoje, num CTESP em Tecnologias e Programação de Sistemas de Informação no IPVC em Viana do Castelo, lidero um projeto real de uma empresa.</p>
+        <p>Sou <!-- Guia de Clã --> e Guia da Tribo Fernando Pessoa — cargos que implicam responsabilidade, liderança e compromisso. Desde que entrei no Clã de Núcleo, tenho dito sim a todas as oportunidades que aparecem à minha frente. Esta candidatura é mais uma delas — e não pretendo desperdiçá-la.</p>
+      </div>
+
+      <div class="carta-bloco">
+        <p class="carta-bloco-label">O que esta experiência vai mudar em mim</p>
+        <p>Vivemos num mundo cada vez mais global, mas a minha realidade ainda é muito local. Esta atividade vai dar-me ferramentas que não encontro em mais nenhum sítio: a capacidade de comunicar e colaborar com pessoas de culturas completamente diferentes, a confiança de funcionar num ambiente internacional, e a experiência de perceber como o escutismo é vivido além-fronteiras.</p>
+        <p>No plano profissional, trabalho diariamente com tecnologia e sistemas de informação — áreas que exigem adaptabilidade, resolução de problemas e trabalho em equipa sob pressão. Todas estas competências serão treinadas e aprofundadas ao longo desta atividade. Mas, acima de tudo, esta experiência vai confirmar algo que já começo a acreditar: que sou capaz de enfrentar o desconhecido com espírito de serviço, alegria e determinação — tal como a Lei do Escuta me pede.</p>
+      </div>
+
+      <div class="carta-bloco">
+        <p class="carta-bloco-label">Fecho</p>
+        <p>Há dois anos, eramos dois num Clã quase vazio. Hoje candidato-me a representar o CNE num centro escutista mundial. Esta não é apenas uma candidatura — é a prova de que o escutismo, quando vivido com autenticidade, transforma.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria">
+  <div class="section-inner">
+    <p class="section-label fade-in">Momentos</p>
+    <h2 class="section-title fade-in">Galeria escutista</h2>
+
+    <div class="galeria-grid fade-in">
+      <div class="galeria-item"><img src="Imagens/Captura de ecrã 2026-04-16 161550.png" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.43.jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45.jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (1).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (2).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (3).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (4).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (5).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (6).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (7).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (8).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (9).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (10).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (11).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (12).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (13).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (14).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (15).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (17).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (18).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (19).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (20).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (21).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (22).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (23).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (24).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (25).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (27).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (28).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (29).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (30).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.51.45 (31).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 16.53.26.jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 17.09.11 (1).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 17.09.11 (2).jpeg" alt="Foto escutista"></div>
+      <div class="galeria-item"><img src="Imagens/WhatsApp Image 2026-04-16 at 17.09.11.jpeg" alt="Foto escutista"></div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section id="download" class="download-section">
+  <div class="download-inner">
+    <div class="download-text">
+      <h3>Carta de motivação</h3>
+      <p>Descarrega a versão em PDF para consulta ou arquivo</p>
+    </div>
+    <a href="#" class="btn-download" onclick="downloadCarta(); return false;">
+      ⬇ Descarregar carta em PDF
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="fleur">⚜</span>
+  <p>Agrupamento 1250 · Adães &nbsp;·&nbsp; Núcleo de Barcelos &nbsp;·&nbsp; CNE Região Braga</p>
+  <p style="margin-top:0.5rem; opacity:0.5;">Candidatura PWP & HTH-pt 2026 &nbsp;·&nbsp; Sempre Alerta</p>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-in, .timeline-item').forEach(el => observer.observe(el));
+
+  // Stagger timeline items
+  document.querySelectorAll('.timeline-item').forEach((item, i) => {
+    item.style.transitionDelay = (i * 0.15) + 's';
+  });
+
+  // Download carta as PDF using print
+  function downloadCarta() {
+    const printWindow = window.open('', '_blank');
+    const cartaContent = document.querySelector('.carta-body').innerHTML;
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>Carta de Motivação — PWP & HTH-pt 2026</title>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+        <style>
+          body { font-family: 'Libre Baskerville', serif; max-width: 700px; margin: 3rem auto; padding: 0 2rem; color: #1A1208; line-height: 1.9; font-size: 1rem; }
+          h1 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.3rem; }
+          .meta { font-size: 0.8rem; color: #7C5C3A; margin-bottom: 3rem; font-family: 'DM Sans', sans-serif; }
+          .carta-bloco { margin-bottom: 2rem; }
+          .carta-bloco-label { font-family: 'DM Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: #7C5C3A; border-bottom: 1px solid #DDD; padding-bottom: 4px; margin-bottom: 0.75rem; }
+          p { margin-bottom: 1rem; }
+          @media print { body { margin: 1rem; } }
+        </style>
+      </head>
+      <body>
+        <h1>Carta de Motivação</h1>
+        <p class="meta">Portuguese Work Party &amp; Help the Hill Portugal 2026 &nbsp;·&nbsp; Agrupamento 1250 Adães · CNE</p>
+        ${cartaContent}
+        <br><br>
+        <p style="font-size:0.85rem; color:#999; border-top:1px solid #ddd; padding-top:1rem; font-family:'DM Sans',sans-serif;">
+          Candidatura via website pessoal · Agrupamento 1250 · Adães · Núcleo de Barcelos · Região Braga
+        </p>
+      </body>
+      </html>
+    `);
+    printWindow.document.close();
+    setTimeout(() => { printWindow.print(); }, 600);
+  }
+</script>
+
+</body>
+</html>
