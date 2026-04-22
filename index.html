@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Candidatura PWP & HTH-pt 2026 — Agrupamento 1250 Adães</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%232C3E2D'/><text x='16' y='25' text-anchor='middle' font-size='22' fill='%23C9A84C'>⚜</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -88,7 +89,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 6rem 2rem 4rem;
+    padding: 6rem 2rem 9rem;
     text-align: center;
     overflow: hidden;
   }
@@ -579,14 +580,33 @@
     transform: translateY(0);
   }
 
-  /* RESPONSIVE */
-  @media (max-width: 600px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .sobre-grid { grid-template-columns: 1fr; }
+  /* RESPONSIVE — tablet */
+  @media (max-width: 768px) {
+    .section-inner { padding: 3.5rem 1.5rem; }
     .galeria-grid { grid-template-columns: repeat(2, 1fr); }
-    .carta-body { padding: 1.5rem; }
-    .download-inner { flex-direction: column; align-items: flex-start; }
+    .hero-badges { gap: 0.6rem; }
+    .badge { font-size: 0.72rem; padding: 0.45rem 1rem; }
+  }
+
+  /* RESPONSIVE — mobile */
+  @media (max-width: 600px) {
+    nav { padding: 1rem 1.2rem; }
+    .nav-links { display: none; }
+    .hero { padding: 5rem 1.2rem 8rem; }
+    .hero-title { font-size: clamp(2rem, 10vw, 3rem); }
+    .hero-subtitle { font-size: 0.95rem; margin: 1rem 0 2rem; }
+    .hero-badges { flex-direction: column; align-items: center; gap: 0.5rem; }
+    .badge { font-size: 0.75rem; padding: 0.5rem 1.1rem; }
+    .section-inner { padding: 3rem 1.2rem; }
+    .section-title { font-size: clamp(1.5rem, 6vw, 2rem); margin-bottom: 1.2rem; }
+    .sobre-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .galeria-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+    .carta-body { padding: 1.2rem; font-size: 0.92rem; }
+    .carta-bloco { margin-bottom: 1.5rem; }
+    .timeline { padding-left: 1.5rem; }
+    .download-inner { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+    .btn-download { width: 100%; justify-content: center; }
+    .scroll-hint { bottom: 1.5rem; }
   }
 </style>
 </head>
@@ -629,9 +649,18 @@
     </h1>
     <p class="hero-subtitle">Uma viagem de serviço, crescimento e escutismo além-fronteiras</p>
     <div class="hero-badges">
-      <span class="badge">🇨🇭 Kandersteg · Suíça</span>
-      <span class="badge">🇮🇪 Larch Hill · Irlanda</span>
-      <span class="badge">📅 3–11 Outubro 2026</span>
+      <span class="badge">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1 12 L4.5 4.5 L7 7.5 L9.5 3.5 L12 12 Z" fill="currentColor" opacity="0.9"/></svg>
+        Kandersteg · Suíça
+      </span>
+      <span class="badge">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1 10 Q3.5 3 6.5 6 Q9.5 9 12 2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+        Larch Hill · Irlanda
+      </span>
+      <span class="badge">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><rect x="1" y="2.5" width="11" height="9.5" rx="1.2" stroke="currentColor" stroke-width="1.3"/><line x1="1" y1="6" x2="12" y2="6" stroke="currentColor" stroke-width="1.3"/><line x1="4" y1="1" x2="4" y2="4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="9" y1="1" x2="9" y2="4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        3–11 Outubro 2026
+      </span>
     </div>
   </div>
 
