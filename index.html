@@ -511,38 +511,96 @@
     line-height: 1.6;
   }
 
-  .docs-lista {
+  .cartas-chefe {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
-  .doc-card {
-    background: rgba(245, 240, 232, 0.05);
-    border: 1px solid rgba(245, 240, 232, 0.1);
+  .carta-doc {
+    background: rgba(245, 240, 232, 0.06);
+    border: 1px solid rgba(245, 240, 232, 0.12);
     border-radius: 4px;
-    padding: 1.3rem 1.5rem;
+    overflow: hidden;
+  }
+
+  .carta-doc-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.5rem;
-    transition: border-color 0.3s;
+    gap: 1rem;
+    padding: 0.9rem 1.4rem;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    background: rgba(201, 168, 76, 0.06);
   }
 
-  .doc-card:hover { border-color: rgba(201, 168, 76, 0.3); }
+  .carta-doc-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
 
-  .doc-info { flex: 1; }
+  .btn-doc-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+    text-decoration: none;
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    padding: 0.35rem 0.9rem;
+    border-radius: 2rem;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
 
-  .doc-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
+  .btn-doc-download:hover {
+    background: var(--gold);
+    color: var(--forest);
+  }
+
+  .carta-doc-body {
+    padding: 1.5rem;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.88rem;
+    line-height: 1.85;
     color: var(--cream);
-    margin-bottom: 0.25rem;
   }
 
-  .doc-desc {
+  .carta-doc-dest {
     font-size: 0.8rem;
     color: var(--sage);
+    margin-bottom: 0.3rem;
+  }
+
+  .carta-doc-date {
+    font-size: 0.8rem;
+    color: var(--mist);
+    text-align: right;
+    margin-bottom: 1.2rem;
+  }
+
+  .carta-doc-assunto {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+  }
+
+  .carta-doc-body p { margin-bottom: 0.9rem; }
+  .carta-doc-body p:last-child { margin-bottom: 0; }
+
+  .carta-doc-fecho {
+    margin-top: 1.2rem;
+    font-style: italic;
+    color: var(--mist);
   }
 
   .btn-download {
@@ -634,8 +692,8 @@
     .hero-badges { gap: 0.6rem; }
     .badge { font-size: 0.72rem; padding: 0.45rem 1rem; }
     .chefe-layout { grid-template-columns: 1fr; gap: 2rem; }
-    .doc-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
-    .doc-card .btn-download { width: 100%; justify-content: center; }
+    .carta-doc-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .carta-doc-body { padding: 1.1rem; font-size: 0.83rem; }
   }
 
   /* RESPONSIVE — mobile */
@@ -850,39 +908,50 @@
         <p class="chefe-cargo">Chefe de Agrupamento<br>Agrupamento 1250 · Adães<br>Núcleo de Barcelos · CNE</p>
       </div>
 
-      <div class="docs-lista">
-        <div class="doc-card">
-          <div class="doc-info">
-            <p class="doc-title">Declaração de conhecimento da candidatura</p>
-            <p class="doc-desc">Documento assinado pelo Chefe de Agrupamento a atestar conhecimento da candidatura</p>
+      <div class="cartas-chefe">
+
+        <!-- Declaração -->
+        <div class="carta-doc">
+          <div class="carta-doc-header">
+            <span class="carta-doc-label">Declaração de conhecimento da candidatura</span>
+            <a href="Declaracao_JorgeCunha_signed.pdf" class="btn-doc-download" download>
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1 L7 9 M4 6.5 L7 9.5 L10 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11 H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              PDF assinado
+            </a>
           </div>
-          <a href="Declaracao_JorgeCunha_signed.pdf" class="btn-download" download>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1 L7 9 M4 6.5 L7 9.5 L10 6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11 H12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            Descarregar
-          </a>
+          <div class="carta-doc-body">
+            <p class="carta-doc-dest">À: Secretaria Internacional do Corpo Nacional de Escutas</p>
+            <p class="carta-doc-date">Adães, 8 de Maio de 2026</p>
+            <p class="carta-doc-assunto">Assunto: Conhecimento da inscrição do caminheiro Jorge Cunha nas atividades PWP e HTH-pt</p>
+            <p>Eu, Sérgio Lopes, na qualidade de Chefe de Agrupamento do Agrupamento 1250-Adães do CNE, declaro ter conhecimento que o caminheiro Jorge Cunha, com o NIN 1705011250002, irá efetuar a sua inscrição nas atividades: Portuguese Work Party e Help the Hill Portugal.</p>
+            <p class="carta-doc-fecho">O Chefe de Agrupamento,<br>Sérgio Lopes</p>
+          </div>
         </div>
 
-        <div class="doc-card">
-          <div class="doc-info">
-            <p class="doc-title">Carta de recomendação</p>
-            <p class="doc-desc">Carta de recomendação para a HTH-pt escrita pelo Chefe de Agrupamento</p>
+        <!-- Carta de Recomendação -->
+        <div class="carta-doc">
+          <div class="carta-doc-header">
+            <span class="carta-doc-label">Carta de recomendação</span>
+            <a href="Carta-Recomendacao-HTH_JorgeCunha_signed.pdf" class="btn-doc-download" download>
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1 L7 9 M4 6.5 L7 9.5 L10 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11 H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              PDF assinado
+            </a>
           </div>
-          <a href="Carta-Recomendacao-HTH_JorgeCunha_signed.pdf" class="btn-download" download>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1 L7 9 M4 6.5 L7 9.5 L10 6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11 H12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            Descarregar
-          </a>
+          <div class="carta-doc-body">
+            <p class="carta-doc-dest">À: Equipa de Organização da Atividade HTH Portugal</p>
+            <p class="carta-doc-date">Adães, 8 de Maio de 2026</p>
+            <p class="carta-doc-assunto">Assunto: Carta de recomendação do caminheiro Jorge Cunha para inscrição na atividade HTH</p>
+            <p>Na qualidade de Chefe de Agrupamento, Chefe de Unidade da IV e anteriormente Chefe do caminheiro Jorge Cunha, com o NIN 1705011250002, nas secções por onde ele foi passado, posso recomendar vivamente o Jorge para a participação neste projeto HTH.</p>
+            <p>O Jorge teve um percurso notável de crescimento dentro do escutismo, como escuteiro e como jovem. É hoje uma pessoa responsável com um alto sentido de compromisso e de ajuda ao próximo.</p>
+            <p>Estas características foram e são bastante evidentes no seu percurso como caminheiro. O Jorge viu-se numa situação em que praticamente todos os restantes elementos do seu pequeno Clã saíram do movimento. Em vez de seguir a tendência, que seria o caminho mais fácil, o Jorge optou por entrar de cabeça no Clã de Núcleo de Barcelos, sem que conhecesse nenhum dos caminheiros desse Clã, certo da sua vontade de continuar no escutismo. O Jorge foi ganhando a confiança dos elementos do Clã de Núcleo, através da sua personalidade e das características que evidenciei acima e foi neste momento eleito o Guia de Clã, sendo um grande reconhecimento da sua competência.</p>
+            <p>Foi também escolhido para integrar a Equipa Projeto do Cenáculo do Núcleo de Barcelos que se realizou em Março deste ano.</p>
+            <p>Nunca esquecendo as suas raízes, o Jorge continua também a participar na vida escutista e nas responsabilidades do nosso agrupamento, 1250-Adães, fazendo inclusive serviço na II secção há 2 anos.</p>
+            <p>O Jorge tem também vindo a participar nas mais diversas atividades do CNE a todos os níveis, desde agrupamento até atividades nacionais (direcionadas para a IV), colecionando experiências e aprendizagens valiosas para a sua bagagem. Acho que a sua participação na atividade HTH iria elevar ainda mais as suas competências e sentido de serviço, fazendo dele um ainda melhor escuteiro e pessoa.</p>
+            <p>Estou disponível para mais alguma informação que necessitem.</p>
+            <p class="carta-doc-fecho">Fortes canhotas.<br>Sérgio Lopes,<br>Chefe de Agrupamento 1250-Adães</p>
+          </div>
         </div>
 
-        <div class="doc-card">
-          <div class="doc-info">
-            <p class="doc-title">Carta de motivação</p>
-            <p class="doc-desc">Carta de candidatura PWP &amp; HTH-pt 2026 — gera PDF via browser</p>
-          </div>
-          <a href="#" class="btn-download" onclick="downloadCarta(); return false;" style="background: transparent; border: 1px solid var(--gold); color: var(--gold);">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1 L7 9 M4 6.5 L7 9.5 L10 6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11 H12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            Gerar PDF
-          </a>
-        </div>
       </div>
 
     </div>
