@@ -82,6 +82,57 @@
 
   .nav-links a:hover { color: var(--gold); }
 
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 101;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+
+    .nav-hamburger { display: flex; }
+
+    .nav-links {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(28, 40, 29, 0.97);
+      backdrop-filter: blur(16px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      z-index: 100;
+    }
+
+    .nav-links.open { display: flex; }
+
+    .nav-links a {
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+    }
+  }
+
   /* HERO */
   .hero {
     min-height: 100vh;
@@ -856,7 +907,10 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">✦ &nbsp;Candidatura Internacional 2026&nbsp; ✦</div>
-  <ul class="nav-links">
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
     <li><a href="#sobre">Sobre mim</a></li>
     <li><a href="#percurso">Percurso</a></li>
     <li><a href="#video">Vídeo</a></li>
@@ -1215,6 +1269,20 @@
 </footer>
 
 <script>
+  // Hambúrguer
+  const hamburger = document.getElementById('nav-hamburger');
+  const navLinks = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
+
   // Scroll animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
